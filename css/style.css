@@ -1,0 +1,682 @@
+/* ========================================
+   IconMaker - Apple App Icon Generator
+   样式文件
+   ======================================== */
+
+/* CSS 变量 */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* 重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* 动态渐变背景 */
+.gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483, #764ba2);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 粒子背景效果 */
+.gradient-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(79, 172, 254, 0.2) 0%, transparent 40%);
+    animation: floatParticles 20s ease-in-out infinite;
+}
+
+@keyframes floatParticles {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+}
+
+/* 主容器 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 头部 */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.logo-icon {
+    width: 64px;
+    height: 64px;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.logo-icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 12px rgba(102, 126, 234, 0.4));
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+/* 毛玻璃卡片 */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+}
+
+/* 上传区域 */
+.upload-section {
+    margin-bottom: 32px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.upload-card {
+    padding: 40px;
+}
+
+.upload-area {
+    border: 2px dashed var(--glass-border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.upload-area:hover {
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateY(-2px);
+}
+
+.upload-area:hover::before {
+    opacity: 1;
+}
+
+.upload-area.drag-over {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.2);
+    transform: scale(1.02);
+}
+
+.upload-area.drag-over::before {
+    opacity: 1;
+}
+
+.upload-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    color: var(--text-secondary);
+    transition: all var(--transition-normal);
+    position: relative;
+    z-index: 1;
+}
+
+.upload-area:hover .upload-icon {
+    color: #667eea;
+    transform: scale(1.1);
+}
+
+.upload-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.upload-area h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.upload-area p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 预览区域 */
+.preview-container {
+    margin-top: 32px;
+    animation: scaleIn 0.4s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.preview-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.btn-remove {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.btn-remove:hover {
+    background: rgba(244, 67, 54, 0.3);
+    transform: rotate(90deg);
+}
+
+.btn-remove svg {
+    width: 20px;
+    height: 20px;
+}
+
+.preview-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin-bottom: 16px;
+}
+
+.preview-image {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.image-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* 平台选择 */
+.platform-section {
+    margin-bottom: 32px;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.platform-card {
+    padding: 32px;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.platform-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 0;
+}
+
+.platform-item:hover {
+    transform: translateY(-4px);
+}
+
+.platform-item:has(input:checked) {
+    border-color: rgba(102, 126, 234, 0.5);
+    background: rgba(102, 126, 234, 0.15);
+}
+
+.platform-item:has(input:checked)::before {
+    opacity: 0.1;
+}
+
+.platform-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.platform-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: var(--primary-gradient);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    position: relative;
+    z-index: 1;
+    transition: transform var(--transition-normal);
+}
+
+.platform-item:hover .platform-icon {
+    transform: scale(1.1);
+}
+
+.platform-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+}
+
+.platform-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.platform-sizes {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+}
+
+/* 生成按钮 */
+.generate-section {
+    margin-bottom: 32px;
+    animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.btn-generate {
+    width: 100%;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 16px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-generate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-generate:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(102, 126, 234, 0.5);
+}
+
+.btn-generate:hover::before {
+    left: 100%;
+}
+
+.btn-generate:active {
+    transform: translateY(-2px);
+}
+
+.btn-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* 进度和结果 */
+.result-section {
+    animation: fadeInUp 0.8s ease 0.8s both;
+}
+
+.result-card {
+    padding: 32px;
+}
+
+.progress-container {
+    text-align: center;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.progress-percent {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary-gradient);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-status {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* 结果内容 */
+.result-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    color: #38ef7d;
+    animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.success-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.result-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.result-info {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.btn-download {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    background: var(--success-gradient);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 24px rgba(56, 239, 125, 0.3);
+    transition: all var(--transition-normal);
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(56, 239, 125, 0.4);
+}
+
+.btn-download svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* 页脚 */
+.footer {
+    margin-top: auto;
+    padding-top: 40px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    animation: fadeIn 1s ease 1s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .upload-card {
+        padding: 24px 16px;
+    }
+    
+    .upload-area {
+        padding: 40px 20px;
+    }
+    
+    .platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .platform-item {
+        padding: 16px 12px;
+    }
+    
+    .platform-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .btn-generate {
+        padding: 16px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
